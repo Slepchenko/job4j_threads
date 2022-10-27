@@ -12,11 +12,9 @@ public class ThreadState {
         first.start();
         second.start();
         while (first.getState() != Thread.State.TERMINATED
-                && second.getState() != Thread.State.TERMINATED) {
+                || second.getState() != Thread.State.TERMINATED) {
             System.out.println("first - " + first.getState());
             System.out.println("second - " + second.getState());
         }
-        System.out.println("first - " + first.getState());
-        System.out.println("second - " + second.getState());
     }
 }
