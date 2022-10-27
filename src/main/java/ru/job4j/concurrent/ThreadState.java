@@ -8,18 +8,15 @@ public class ThreadState {
         Thread second = new Thread(
                 () -> { }
         );
-        System.out.println("first - " + first.getState());
-
+        System.out.println(first.getState());
         first.start();
         second.start();
-        while (first.getState() != Thread.State.TERMINATED) {
+        while (first.getState() != Thread.State.TERMINATED
+                && second.getState() != Thread.State.TERMINATED) {
             System.out.println("first - " + first.getState());
-        }
-        System.out.println("first - " + first.getState());
-        System.out.println("second - " + second.getState());
-        while (second.getState() != Thread.State.TERMINATED) {
             System.out.println("second - " + second.getState());
         }
+        System.out.println("first - " + first.getState());
         System.out.println("second - " + second.getState());
     }
 }
