@@ -11,6 +11,7 @@ public class ThreadStop {
                         } catch (InterruptedException e) {
                             System.out.println(Thread.currentThread().isInterrupted());
                             System.out.println(Thread.currentThread().getState());
+                            Thread.currentThread().interrupt();
                         }
                     }
                 }
