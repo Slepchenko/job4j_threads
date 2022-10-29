@@ -4,7 +4,7 @@ public class ConsoleProgress implements Runnable {
 
     public static final int SIZE = 3;
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         Thread progress = new Thread(new ConsoleProgress());
         progress.start();
         try {
