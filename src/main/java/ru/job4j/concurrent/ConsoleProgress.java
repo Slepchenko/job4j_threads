@@ -4,10 +4,14 @@ public class ConsoleProgress implements Runnable {
 
     public static final int SIZE = 3;
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args){
         Thread progress = new Thread(new ConsoleProgress());
         progress.start();
-        Thread.sleep(1000);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            progress.interrupt();
+        }
         progress.interrupt();
     }
 
