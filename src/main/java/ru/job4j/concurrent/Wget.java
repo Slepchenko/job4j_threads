@@ -41,10 +41,10 @@ public class Wget implements Runnable {
                         } catch (InterruptedException e) {
                             throw new RuntimeException(e);
                         }
-                        start = Instant.now();
-                        downloadData = 0;
                     }
                 }
+                start = Instant.now();
+                downloadData = 0;
             }
         } catch (IOException e) {
             e.printStackTrace();
