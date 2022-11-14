@@ -23,8 +23,8 @@ public class UserCache {
 
     public List<User> findAll() {
         List<User> usersList = new ArrayList<>();
-        for (Map.Entry<Integer, User> user : users.entrySet()) {
-            usersList.add(User.of(user.getValue().getName()));
+        for (User user : users.values()) {
+            usersList.add(User.of(user.getName()));
         }
         return usersList;
     }
