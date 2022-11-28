@@ -15,17 +15,17 @@ public class GetContent {
     }
 
     public String content(Predicate<Character> filter) {
-        String output = "";
+        StringBuilder output = new StringBuilder();
         try (InputStream i = new FileInputStream(file)) {
             int data;
-            while ((data = i.read()) > 0) {
+            while ((data = i.read()) != -1) {
                 if (filter.test((char) data)) {
-                    output += (char) data;
+                    output.append((char) data);
                 }
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return output;
+        return output.toString();
     }
 }

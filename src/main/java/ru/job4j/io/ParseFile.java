@@ -19,8 +19,15 @@ public final class ParseFile {
         saveContent.save();
     }
 
-    public void getContent() {
+    public void getSimpleContent() {
         GetContent getContent = new GetContent(file);
-        System.out.println(getContent.content(filter));
+        Predicate<Character> predicate = (c) -> true;
+        System.out.println(getContent.content(predicate));
+    }
+
+    public void getContentWithoutUnicode() {
+        GetContent getContent = new GetContent(file);
+        Predicate<Character> predicate = (c) -> c < 0x80;
+        System.out.println(getContent.content(predicate));
     }
 }
