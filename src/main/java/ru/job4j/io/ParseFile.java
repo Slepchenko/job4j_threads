@@ -14,16 +14,13 @@ public final class ParseFile {
         this.filter = filter;
     }
 
-    public void saveContent(String content) throws IOException {
-        try (OutputStream o = new FileOutputStream(file)) {
-            for (int i = 0; i < content.length(); i += 1) {
-                o.write(content.charAt(i));
-            }
-        }
-    }
-    public void getContent(GetContent getContent) {
-        LoadFile loadFile = new LoadFile(getContent, filter);
-        loadFile.getContent(file);
+    public void saveContent(String content) {
+        SaveContent saveContent = new SaveContent(file, content);
+        saveContent.save();
     }
 
+    public void getContent() {
+        GetContent getContent = new GetContent(file);
+        System.out.println(getContent.content(filter));
+    }
 }
