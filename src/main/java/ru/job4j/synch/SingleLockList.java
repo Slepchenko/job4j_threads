@@ -1,5 +1,6 @@
 package ru.job4j.synch;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -11,7 +12,7 @@ public class SingleLockList<T> implements Iterable<T> {
     }
 
     public synchronized void add(T value) {
-
+        list.add(value);
     }
 
     public synchronized T get(int index) {
@@ -24,6 +25,6 @@ public class SingleLockList<T> implements Iterable<T> {
     }
 
     private synchronized List<T> copy(List<T> origin) {
-        return List.copyOf(origin);
+        return new ArrayList<>(origin);
     }
 }
