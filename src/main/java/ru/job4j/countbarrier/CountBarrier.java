@@ -24,7 +24,6 @@ public class CountBarrier {
                 while (count < total) {
                     monitor.wait();
                 }
-                count();
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
