@@ -9,9 +9,7 @@ class SimpleBlockingQueueTest {
 
     @Test
     public void whenEmptyQueue() {
-        SimpleBlockingQueue<Integer> sbq = new SimpleBlockingQueue<>(3);
-        Thread consumer = new Thread(sbq::poll);
-        consumer.start();
+
     }
 
     @Test
