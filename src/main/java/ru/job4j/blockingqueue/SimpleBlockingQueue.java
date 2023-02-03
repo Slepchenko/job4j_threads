@@ -18,27 +18,17 @@ public class SimpleBlockingQueue<T> {
         this.size = size;
     }
 
-    public synchronized void offer(T value) {
-        try {
-            while (queue.size() >= size) {
-                this.wait();
-            }
-        } catch (InterruptedException e) {
-            throw new RuntimeException();
+    public synchronized void offer(T value) throws InterruptedException {
+        while (queue.size() >= size) {
+            this.wait();
         }
-        this.notify();
         queue.offer(value);
+        this.notify();
     }
 
     public synchronized T poll() {
-        try {
-            while (queue.size() == 0) {
-                this.wait();
-            }
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        T result = queue.poll();
         this.notify();
-        return queue.poll();
+        return result;
     }
 }

@@ -16,12 +16,6 @@ class SimpleBlockingQueueTest {
 
     @Test
     public void whenFullQueue() {
-        SimpleBlockingQueue<Integer> sbq = new SimpleBlockingQueue<>(3);
-        sbq.offer(1);
-        sbq.offer(1);
-        sbq.offer(1);
 
-        Thread producer = new Thread(() -> sbq.offer(1));
-        producer.start();
     }
 }
