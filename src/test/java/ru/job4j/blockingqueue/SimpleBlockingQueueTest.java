@@ -28,7 +28,6 @@ class SimpleBlockingQueueTest {
                         try {
                             buffer.add(queue.poll());
                         } catch (InterruptedException e) {
-                            e.printStackTrace();
                             Thread.currentThread().interrupt();
                         }
                     }
@@ -40,6 +39,5 @@ class SimpleBlockingQueueTest {
         consumer.join();
         List<Integer> expect = List.of(0, 1, 2, 3, 4);
         Assertions.assertIterableEquals(expect, buffer);
-
     }
 }
