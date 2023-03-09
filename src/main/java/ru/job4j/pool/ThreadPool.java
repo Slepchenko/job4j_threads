@@ -33,9 +33,7 @@ public class ThreadPool {
     }
 
     public void shutdown() {
-        for (Thread th : threads) {
-            th.interrupt();
-        }
+        threads.forEach(Thread::interrupt);
     }
 
     public static void main(String[] args) throws InterruptedException {
