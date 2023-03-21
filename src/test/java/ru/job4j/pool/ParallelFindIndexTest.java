@@ -31,4 +31,5 @@ class ParallelFindIndexTest {
         ParallelFindIndex<Integer> pfi = new ParallelFindIndex<>(112, array, 0, array.length - 1);
         assertEquals(-1, forkJoinPool.invoke(pfi));
     }
+
 }
