@@ -7,6 +7,7 @@ import java.util.concurrent.ForkJoinPool;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ParallelFindIndexTest {
+
     @Test
     public void whenFoundIndexInteger() {
         ForkJoinPool forkJoinPool = new ForkJoinPool();

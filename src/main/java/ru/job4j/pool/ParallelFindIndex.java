@@ -38,6 +38,7 @@ public class ParallelFindIndex<T> extends RecursiveTask<Integer> {
         right.fork();
         int l = left.join();
         int r = right.join();
+
         if (r != -1 && array[r].equals(obj)) {
             return r;
         }
