@@ -53,8 +53,58 @@ public class CompletableFutureEx {
         System.out.println("Куплено: " + bm.get());
     }
 
+    public static void thenRunExample() throws Exception {
+        CompletableFuture<Void> gtt = goToTrash();
+        gtt.thenRun(() -> {
+            int count = 0;
+            while (count < 3) {
+                System.out.println("Сын: я мою руки");
+                try {
+                    TimeUnit.MILLISECONDS.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                count++;
+            }
+            System.out.println("Сын: Я помыл руки");
+        });
+        iWork();
+    }
+
+    public static void thenAcceptExample() throws Exception {
+        CompletableFuture<String> bm = buyProduct("Молоко");
+        bm.thenAccept((product) -> System.out.println("Сын: Я убрал " + product + " в холодильник "));
+        iWork();
+        System.out.println("Куплено: " + bm.get());
+    }
+
+    public static void thenApplyExample() throws Exception {
+        CompletableFuture<String> bm = buyProduct("Молоко")
+                .thenApply((product) -> "Сын: я налил тебе в кружку " + product + ". Держи.");
+        iWork();
+        System.out.println(bm.get());
+    }
+
+    public static void thenComposeExample() throws Exception {
+        CompletableFuture<String> result = goToTrash().thenCompose(a -> buyProduct("Milk"));
+        result.get(); // wait calculations;
+    }
+
+    public static void thenCombineExample() throws Exception {
+        CompletableFuture<String> result = buyProduct("Молоко")
+                .thenCombine(buyProduct("Хлеб"), (r1, r2) -> "Куплены " + r1 + " и " + r2);
+        iWork();
+        System.out.println(result.get());
+    }
+
     public static void main(String[] args) throws Exception {
 //        runAsyncExample();
-        supplyAsyncExample();
+//        supplyAsyncExample();
+//        thenRunExample();
+//        thenAcceptExample();
+//        thenApplyExample();
+//        thenComposeExample();
+//        thenCombineExample();
+
     }
 }
