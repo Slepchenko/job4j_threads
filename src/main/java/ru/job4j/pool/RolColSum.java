@@ -8,10 +8,10 @@ public class RolColSum {
     }
 
     public static Sums[] sum(int[][] matrix) {
-
+return null;
     }
 
     public static Sums[] asyncSum(int[][] matrix) {
-
+return null;
     }
 }

@@ -47,6 +47,14 @@ public class MatrixDiagonal {
         });
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ExecutionException, InterruptedException {
+        int[][] arr = new int [][]{ {1,2,3},
+                                    {4,5,6},
+                                    {7,8,9}};
+        int[] res = asyncSum(arr);
+
+        for (int i = 0; i < res.length; i++) {
+            System.out.println(res[i]);
+        }
     }
 }
