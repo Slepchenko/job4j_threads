@@ -12,7 +12,7 @@ public class MatrixDiagonal {
         Map<Integer, CompletableFuture<Integer>> futures = new HashMap<>();
         futures.put(0, getMainDiagonalTask(matrix, 0, n - 1, 0));
         for (int k = 1; k <= n; k++) {
-            futures.put(k, getTask(matrix, 0, k - 1,  k - 1));
+            futures.put(k, getTask(matrix, 0, k - 1, k - 1));
             if (k < n) {
                 futures.put(2 * n - k, getTask(matrix, n - k, n - 1, n - 1));
             }
@@ -48,9 +48,9 @@ public class MatrixDiagonal {
     }
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
-        int[][] arr = new int [][]{ {1,2,3},
-                                    {4,5,6},
-                                    {7,8,9}};
+        int[][] arr = new int[][]{{1, 2, 3},
+                                  {4, 5, 6},
+                                  {7, 8, 9}};
         int[] res = asyncSum(arr);
 
         for (int i = 0; i < res.length; i++) {
