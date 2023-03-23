@@ -23,15 +23,23 @@ public class RolColSum {
     }
 
     public static Sums[] sum(int[][] matrix) {
-        Sums[] res = new Sums[3];
-        int row = 0;
-        int col = 0;
+        Sums[] res = new Sums[matrix.length];
+
+        for (int i = 0; i < matrix.length; i++) {
+            res[i] = new Sums();
+        }
+
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[i].length; j++) {
-
+                res[i].setRowSum(res[i].getRowSum() + matrix[i][j]);
             }
         }
 
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                res[j].setColSum(res[j].getColSum() + matrix[i][j]);
+            }
+        }
         return res;
     }
 
@@ -40,9 +48,10 @@ public class RolColSum {
     }
 
     public static void main(String[] args) {
-        int[][] arr = new int[][]{{1, 2, 3},
-                                  {4, 5, 6},
-                                  {7, 8, 9}};
+        int[][] arr = new int[][]{{1, 2, 3, 4},
+                                  {5, 6, 7, 8},
+                                  {9, 10, 11, 12},
+                                  {13, 14, 15, 16}};
         RolColSum.Sums[] res = RolColSum.sum(arr);
         for (Sums re : res) {
             System.out.println(re.getRowSum() + " " + re.getColSum());
