@@ -18,9 +18,12 @@ public class ParallelFindIndex<T> extends RecursiveTask<Integer> {
 
     @Override
     protected Integer compute() {
-        if (array.length <= 10) {
+
+        if (array.length <= 10 && (from >= 0 && to <= 10)) {
+            System.out.println("lin");
             return linearSearchElement();
         }
+        System.out.println("rec");
         return recursiveSearchElement();
     }
 
@@ -38,14 +41,11 @@ public class ParallelFindIndex<T> extends RecursiveTask<Integer> {
         right.fork();
         int l = left.join();
         int r = right.join();
-        if (r != -1 && array[r].equals(obj)) {
-            return r;
-        }
-        return l;
+        return Math.max(l, r);
     }
 
     private int linearSearchElement() {
-        for (int i = 0; i < array.length; i++) {
+        for (int i = from; i <= to; i++) {
             if (array[i].equals(obj)) {
                 return i;
             }
