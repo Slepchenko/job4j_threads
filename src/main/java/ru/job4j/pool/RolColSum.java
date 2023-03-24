@@ -1,5 +1,7 @@
 package ru.job4j.pool;
 
+import java.util.concurrent.CompletableFuture;
+
 public class RolColSum {
     public static class Sums {
         private int rowSum;
@@ -32,11 +34,6 @@ public class RolColSum {
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[i].length; j++) {
                 res[i].setRowSum(res[i].getRowSum() + matrix[i][j]);
-            }
-        }
-
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[i].length; j++) {
                 res[j].setColSum(res[j].getColSum() + matrix[i][j]);
             }
         }
@@ -44,9 +41,39 @@ public class RolColSum {
     }
 
     public static Sums[] asyncSum(int[][] matrix) {
-        return null;
+        //
+//        for (int i = 0; i < matrix.length; i++) {
+//            for (int j = 0; j < matrix[i].length; j++) {
+//                res[i].setRowSum(res[i].getRowSum() + matrix[i][j]);
+//            }
+//        }
+//
+//        for (int i = 0; i < matrix.length; i++) {
+//            for (int j = 0; j < matrix[i].length; j++) {
+//                res[j].setColSum(res[j].getColSum() + matrix[i][j]);
+//            }
+//        }
+//        return res;
     }
 
+    private static CompletableFuture<Integer> getRow(int[][] data) {
+        int
+                for (int i = 0; i < data.length; i++) {
+                    for (int j = 0; j < data[i].length; j++) {
+                        res[i].setRowSum(res[i].getRowSum() + matrix[i][j]);
+                    }
+                    return res;
+                }
+    }
+
+    private static CompletableFuture<Integer> getColumn(int[][] data) {
+            for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                res[j].setColSum(res[j].getColSum() + matrix[i][j]);
+            }
+        }
+        return res;
+    }
     public static void main(String[] args) {
         int[][] arr = new int[][]{{1, 2, 3, 4},
                                   {5, 6, 7, 8},
