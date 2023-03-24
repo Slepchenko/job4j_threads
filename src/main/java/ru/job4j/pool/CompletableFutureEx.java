@@ -98,13 +98,13 @@ public class CompletableFutureEx {
     }
 
     public static void main(String[] args) throws Exception {
-//        runAsyncExample();
-//        supplyAsyncExample();
-//        thenRunExample();
-//        thenAcceptExample();
-//        thenApplyExample();
-//        thenComposeExample();
-//        thenCombineExample();
-
+/*        runAsyncExample();
+        supplyAsyncExample();
+        thenRunExample();
+        thenAcceptExample();
+        thenApplyExample();
+        thenComposeExample();
+        thenCombineExample();
+*/
     }
 }
