@@ -41,44 +41,51 @@ public class RolColSum {
     }
 
     public static Sums[] asyncSum(int[][] matrix) {
-        //
-//        for (int i = 0; i < matrix.length; i++) {
-//            for (int j = 0; j < matrix[i].length; j++) {
-//                res[i].setRowSum(res[i].getRowSum() + matrix[i][j]);
-//            }
-//        }
-//
-//        for (int i = 0; i < matrix.length; i++) {
-//            for (int j = 0; j < matrix[i].length; j++) {
-//                res[j].setColSum(res[j].getColSum() + matrix[i][j]);
-//            }
-//        }
-//        return res;
+/*
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                res[i].setRowSum(res[i].getRowSum() + matrix[i][j]);
+            }
+        }
+
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                res[j].setColSum(res[j].getColSum() + matrix[i][j]);
+            }
+        }
+        return res;
+        */
+        return null;
     }
 
     private static CompletableFuture<Integer> getRow(int[][] data) {
-        int
+       /* int res;
                 for (int i = 0; i < data.length; i++) {
                     for (int j = 0; j < data[i].length; j++) {
                         res[i].setRowSum(res[i].getRowSum() + matrix[i][j]);
                     }
                     return res;
                 }
+                */
+
+        return null;
     }
 
     private static CompletableFuture<Integer> getColumn(int[][] data) {
-            for (int i = 0; i < matrix.length; i++) {
+            /*for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[i].length; j++) {
                 res[j].setColSum(res[j].getColSum() + matrix[i][j]);
             }
         }
-        return res;
+        return res;*/
+        return null;
     }
+
     public static void main(String[] args) {
         int[][] arr = new int[][]{{1, 2, 3, 4},
-                                  {5, 6, 7, 8},
-                                  {9, 10, 11, 12},
-                                  {13, 14, 15, 16}};
+                {5, 6, 7, 8},
+                {9, 10, 11, 12},
+                {13, 14, 15, 16}};
         RolColSum.Sums[] res = RolColSum.sum(arr);
         for (Sums re : res) {
             System.out.println(re.getRowSum() + " " + re.getColSum());
