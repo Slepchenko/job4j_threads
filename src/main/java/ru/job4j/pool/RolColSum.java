@@ -1,5 +1,6 @@
 package ru.job4j.pool;
 
+import java.util.Arrays;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
@@ -41,20 +42,23 @@ public class RolColSum {
         return res;
     }
 
-    public static Sums[] asyncSum(Integer[][] matrix) throws ExecutionException, InterruptedException {
-        Sums[] result = new Sums[matrix.length];
-//        CompletableFuture<Integer[]> res = getRow(matrix).thenApply(getColumn(matrix), (r, c) -> r);
-        for (int i = 0; i < matrix.length; i++) {
-            result[i].setRowSum(getRow(matrix).get()[i]);
-            result[i].setColSum(getColumn(matrix).get()[i]);
-        }
-        return result;
+    public static Sums[] asyncSum(int[][] matrix) throws ExecutionException, InterruptedException {
+        CompletableFuture<Sums[]> res = getRow(matrix).thenCombine(getColumn(matrix), (r, c) -> {
+            Sums[] sums = new Sums[matrix.length];
+            for (int i = 0; i < sums.length; i++) {
+                Sums s = new Sums();
+                s.setRowSum(r[i]);
+                s.setColSum(c[i]);
+                sums[i] = s;
+            }
+            return sums;
+        });
+        return res.get();
     }
 
-
-    private static CompletableFuture<Integer[]> getRow(Integer[][] data) {
+    private static CompletableFuture<int[]> getRow(int[][] data) {
         return CompletableFuture.supplyAsync(() -> {
-            Integer[] res = new Integer[data.length];
+            int[] res = new int[data.length];
             for (int i = 0; i < data.length; i++) {
                 for (int j = 0; j < data[i].length; j++) {
                     res[i] += data[i][j];
@@ -64,12 +68,12 @@ public class RolColSum {
         });
     }
 
-    private static CompletableFuture<Integer[]> getColumn(Integer[][] data) {
+    private static CompletableFuture<int[]> getColumn(int[][] data) {
         return CompletableFuture.supplyAsync(() -> {
-            Integer[] res = new Integer[data.length];
+            int[] res = new int[data.length];
             for (int i = 0; i < data.length; i++) {
                 for (int j = 0; j < data[i].length; j++) {
-                    res[i] = res[i] + data[i][j];
+                    res[j] += data[i][j];
                 }
             }
             return res;
@@ -77,17 +81,13 @@ public class RolColSum {
     }
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
-        Integer[][] arr = new Integer[][]{{1, 2, 3, 4},
-                {5, 6, 7, 8},
-                {9, 10, 11, 12},
-                {13, 14, 15, 16}};
-//        RolColSum.Sums[] res = RolColSum.sum(arr);
-//        for (Sums re : res) {
-//            System.out.println(re.getRowSum() + " " + re.getColSum());
-//        }
-        RolColSum.Sums[] res = RolColSum.asyncSum(arr);
-        for (Sums re : res) {
-            System.out.println(re.getRowSum() + " " + re.getColSum());
+        int[][] arr = new int[10000][10000];
+        for (int[] ints : arr) {
+            Arrays.fill(ints, 1);
         }
+        long start = System.currentTimeMillis();
+        RolColSum.asyncSum(arr);
+        long finish = System.currentTimeMillis();
+        System.out.println(finish - start);
     }
 }
