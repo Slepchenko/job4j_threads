@@ -87,7 +87,7 @@ public class CompletableFutureEx {
 
     public static void thenComposeExample() throws Exception {
         CompletableFuture<String> result = goToTrash().thenCompose(a -> buyProduct("Milk"));
-        result.get(); // wait calculations;
+        result.get();
     }
 
     public static void thenCombineExample() throws Exception {
@@ -98,8 +98,6 @@ public class CompletableFutureEx {
     }
 
     public static void main(String[] args) throws Exception {
-
         thenCombineExample();
-
     }
 }
