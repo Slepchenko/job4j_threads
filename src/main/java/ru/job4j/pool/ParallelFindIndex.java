@@ -18,7 +18,7 @@ public class ParallelFindIndex<T> extends RecursiveTask<Integer> {
 
     @Override
     protected Integer compute() {
-        if (array.length <= 10 && (to - from <= 10)) {
+        if (to - from <= 10) {
             return linearSearchElement();
         }
         if (from == to) {
