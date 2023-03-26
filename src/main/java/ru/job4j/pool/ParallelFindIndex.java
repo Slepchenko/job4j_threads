@@ -21,12 +21,7 @@ public class ParallelFindIndex<T> extends RecursiveTask<Integer> {
         if (to - from <= 10) {
             return linearSearchElement();
         }
-        if (from == to) {
-            if (array[from].equals(obj)) {
-                return from;
-            }
-            return -1;
-        }
+
         int mid = (from + to) / 2;
         ParallelFindIndex<T> left = new ParallelFindIndex<>(obj, array, from, mid);
         ParallelFindIndex<T> right = new ParallelFindIndex<>(obj, array, mid + 1, to);
