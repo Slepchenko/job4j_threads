@@ -1,6 +1,8 @@
 package ru.job4j.pool;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
@@ -21,34 +23,32 @@ public class RolColSum {
     }
 
     public static Sums[] asyncSum(int[][] matrix) throws ExecutionException, InterruptedException {
-        CompletableFuture<Sums[]> res = null;
+        Sums[] res = new Sums[matrix.length];
+        Map<Integer, CompletableFuture<Sums>> futures = new HashMap<>();
         for (int i = 0; i < matrix.length; i++) {
-            int index = i;
-            res = getData(matrix, i).thenApply(sum -> {
-                 Sums[] sums = new Sums[matrix.length];
-                 sums[index] = sum;
-                 return sums;
-             });
+            futures.put(i, getTask(matrix, i));
         }
-        return res.get();
+        for (int i = 0; i < res.length; i++) {
+            res[i] = futures.get(i).get();
+        }
+        return res;
     }
 
-    private static CompletableFuture<Sums> getData(int[][] matrix, int index) {
-        Sums sums = new Sums();
-        return CompletableFuture.supplyAsync(() -> {
-            int row = 0;
-            int col = 0;
-            for (int i = 0; i < matrix.length; i++) {
-                row += matrix[index][i];
+    private static CompletableFuture<Sums> getTask(int[][] matrix, int row) {
+        return CompletableFuture.supplyAsync(() -> getSums(matrix, row));
+    }
 
-            }
-            for (int i = 0; i < matrix.length; i++) {
-                col += matrix[i][index];
-            }
-            sums.setRowSum(row);
-            sums.setColSum(col);
-            return sums;
-        });
+    private static Sums getSums(int[][] matrix, int row) {
+        int rowRes = 0;
+        int colRes = 0;
+        Sums sums = new Sums();
+        for (int col = 0; col < matrix.length; col++) {
+            rowRes = matrix[row][col];
+            colRes = matrix[col][row];
+        }
+        sums.setRowSum(rowRes);
+        sums.setColSum(colRes);
+        return new Sums();
     }
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
@@ -56,9 +56,13 @@ public class RolColSum {
         for (int[] ints : arr) {
             Arrays.fill(ints, 1);
         }
-        long start = System.currentTimeMillis();
+        long startSum = System.currentTimeMillis();
+        RolColSum.sum(arr);
+        long finishSum = System.currentTimeMillis();
+        long startAsyncSum = System.currentTimeMillis();
         RolColSum.asyncSum(arr);
-        long finish = System.currentTimeMillis();
-        System.out.println(finish - start);
+        long finishAsyncSum = System.currentTimeMillis();
+        System.out.println("sum " + (finishSum - startSum));
+        System.out.println("asyncSum " + (finishAsyncSum - startAsyncSum));
     }
 }
