@@ -43,12 +43,12 @@ public class RolColSum {
         int colRes = 0;
         Sums sums = new Sums();
         for (int col = 0; col < matrix.length; col++) {
-            rowRes = matrix[row][col];
-            colRes = matrix[col][row];
+            rowRes += matrix[row][col];
+            colRes += matrix[col][row];
         }
         sums.setRowSum(rowRes);
         sums.setColSum(colRes);
-        return new Sums();
+        return sums;
     }
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
