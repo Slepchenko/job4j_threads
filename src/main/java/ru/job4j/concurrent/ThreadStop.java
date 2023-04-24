@@ -6,7 +6,7 @@ public class ThreadStop {
                 () -> {
                     while (!Thread.currentThread().isInterrupted()) {
                         try {
-                            System.out.println("start ...");
+                            System.out.println("start...");
                             Thread.sleep(10000);
                         } catch (InterruptedException e) {
                             System.out.println(Thread.currentThread().isInterrupted());
@@ -17,7 +17,7 @@ public class ThreadStop {
                 }
         );
         progress.start();
-        Thread.sleep(1000);
+        Thread.sleep(1001);
         progress.interrupt();
         progress.join();
     }
