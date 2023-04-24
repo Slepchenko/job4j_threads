@@ -17,7 +17,7 @@ public class ThreadStop {
                 }
         );
         progress.start();
-        Thread.sleep(1000);
+        Thread.sleep(1001);
         progress.interrupt();
         progress.join();
     }
